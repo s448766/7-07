@@ -60,6 +60,7 @@ physics.addBody( badCharacter, "dynamic", {
     } )
 
 local theCharacter = display.newImage( "./assets/sprites/character.png" )
+
 theCharacter.x = display.contentCenterX - 200
 theCharacter.y = display.contentCenterY
 theCharacter.id = "the character"
@@ -68,32 +69,34 @@ physics.addBody( theCharacter, "dynamic", {
     friction = 0.5, 
     bounce = 0.3 
     } )
-theCharacter.isFixedRotation = true -- If you apply this property before the physics.addBody() command for the object, it will merely be treated as a property of the object like any other custom property and, in that case, it will not cause any physical change in terms of locking rotation.
+
+
+theCharacter.isFixedRotation = true -- before the physics.addBody() command for the object, it will merely be treated as a property of the object like any other custom property and, in that case, it will not cause any physical change in terms of locking rotation.
 
 local dPad = display.newImage( "./assets/sprites/d-pad.png" )
 dPad.x = 150
-dPad.y = display.contentHeight - 80
+dPad.y = display.contentHeight - 150
 dPad.alpha = 0.50
 dPad.id = "d-pad"
 
 local upArrow = display.newImage( "./assets/sprites/upArrow.png" )
 upArrow.x = 150
-upArrow.y = display.contentHeight - 190
+upArrow.y = display.contentHeight - 260
 upArrow.id = "up arrow"
 
 local downArrow = display.newImage( "./assets/sprites/downArrow.png" )
 downArrow.x = 150
-downArrow.y = display.contentHeight + 28
+downArrow.y = display.contentHeight - 40
 downArrow.id = "down arrow"
 
 local leftArrow = display.newImage( "./assets/sprites/leftArrow.png" )
 leftArrow.x = 40
-leftArrow.y = display.contentHeight - 80
+leftArrow.y = display.contentHeight - 150
 leftArrow.id = "left arrow"
 
 local rightArrow = display.newImage( "./assets/sprites/rightArrow.png" )
 rightArrow.x = 260
-rightArrow.y = display.contentHeight - 80
+rightArrow.y = display.contentHeight - 150
 rightArrow.id = "right arrow"
 
 local jumpButton = display.newImage( "./assets/sprites/jumpButton.png" )
@@ -118,9 +121,13 @@ local function characterCollision( self, event )
     end
 end
 
--- if character falls off the end of the world, respawn back to where it came from
+-- if character falls off the end of the world
+
+
 local function checkCharacterPosition( event )
-    -- check every frame to see if character has fallen
+    -- check every frame 
+
+
     if theCharacter.y > display.contentHeight + 500 then
         theCharacter.x = display.contentCenterX - 200
         theCharacter.y = display.contentCenterY
@@ -128,7 +135,9 @@ local function checkCharacterPosition( event )
 end
 
 local function checkPlayerBulletsOutOfBounds()
-	-- check if any bullets have gone off the screen
+	-- check if any bullets went offf
+
+
 	local bulletCounter
 
     if #playerBullets > 0 then
@@ -246,7 +255,7 @@ function shootButton:touch( event )
     if ( event.phase == "began" ) then
         -- make a bullet appear
         local aSingleBullet = display.newImage( "./assets/sprites/Kunai.png" )
-        aSingleBullet.x = theCharacter.x
+        aSingleBullet.x = theCharacter.x +300
         aSingleBullet.y = theCharacter.y
         physics.addBody( aSingleBullet, 'dynamic' )
         -- Make the object a "bullet" type object
